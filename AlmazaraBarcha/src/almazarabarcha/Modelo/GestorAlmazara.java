@@ -81,6 +81,31 @@ public class GestorAlmazara {
         panelPrincipal.add(sc.getContentPane());
         panelPrincipal.repaint();
     }
+    
+    public void GenerarInformeMensual(){
+        HashMap parameters = new HashMap<>();
+        String dir = "";
+        
+        try {
+            conectar("root", "");
+        } catch (BusinessException ex) {
+            Logger.getLogger(FinalizarMolturacion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        parameters.put("variable", new String("Este es un String para pasar por parametro"));
+        dir = "src/informes/informeMensual.jrxml";
+
+        try {
+
+                JasperReport reporteJasper = JasperCompileManager.compileReport(dir);
+                JasperPrint mostrarReporte = JasperFillManager.fillReport(
+                        reporteJasper, parameters,
+                        getCon());
+                JasperViewer.viewReport(mostrarReporte, false);
+            } catch (JRException e) {
+                e.printStackTrace();
+            }
+    }
 
     public void GeneraAlbaranConParametros(Object o) {
         HashMap parameters = new HashMap<>();

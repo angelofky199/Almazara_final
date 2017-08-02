@@ -1,12 +1,8 @@
 package almazarabarcha.Modelo;
 
-import almazarabarcha.Modelo.Inventario.TipoAceite;
-import almazarabarcha.Modelo.Inventario.TipoEnvase;
-import capaDAO.DaoInformes;
 import capaDAO.DaoMolturacion;
 import excepciones.BusinessException;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;

@@ -1,24 +1,21 @@
 package almazarabarcha.vista;
 
+import almazarabarcha.Modelo.GestorAlmazara;
 import almazarabarcha.Modelo.Informes;
 import almazarabarcha.estilos.Estilos;
-import capaDAO.DaoInformes;
-import excepciones.BusinessException;
 import java.awt.Color;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import pojos.Usuario;
 
 public class MenuPrincipal extends JFrame {
+
     private Usuario u;
     private Estilos estilos;
     private Informes infor;
-    
+    private GestorAlmazara ga; 
+
     public MenuPrincipal(Usuario u) throws IOException {
         jPanel1 = new JPanel();
         estilos = new Estilos();
@@ -27,11 +24,10 @@ public class MenuPrincipal extends JFrame {
         //gestor = new GestorAlmazara();
         //this.setSize(1000, 700);
         //this.getGraphics().drawImage(ImageIO.read(new File("src/recursos/fondo.jpg")), 0, 0, this);
-        
+
         label_titulo.setOpaque(true);
         label_titulo.setForeground(estilos.getColorFuenteTítulo());
         //label_titulo.setBackground(estilos.getColorTítulo());
-        
 
         boton_addClientes.setFont(estilos.getFuenteBotones());
         boton_seleccionar_cliente.setFont(estilos.getFuenteBotones());
@@ -49,13 +45,13 @@ public class MenuPrincipal extends JFrame {
         btn_salir.setForeground(Color.white);
         btn_salir.setFont(estilos.getFuenteBotones());
         jPanel1.setBackground(estilos.getColorInterior());
-        
-        
+
         this.setIconImage(estilos.getImagenIcono());
         this.setTitle("Almazara Barcha");
         this.setExtendedState(MAXIMIZED_BOTH);
         this.u = u;
         lb_nombreUser.setText(u.getNombre());
+        ga = new GestorAlmazara();
     }
 
     /**
@@ -236,9 +232,9 @@ public class MenuPrincipal extends JFrame {
         jPanel1.removeAll();
         AñadirCliente c = new AñadirCliente();
         c.getContentPane().setBackground(estilos.getColorInterior());
-        jPanel1.add(c.getContentPane()); 
+        jPanel1.add(c.getContentPane());
         jPanel1.repaint();
-        
+
         boton_addClientes.setBackground(Color.yellow);
         btnGastos.setBackground(estilos.getColorBotones());
         btnInformes.setBackground(estilos.getColorBotones());
@@ -253,11 +249,11 @@ public class MenuPrincipal extends JFrame {
 
     private void boton_seleccionar_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_seleccionar_clienteActionPerformed
         jPanel1.removeAll();
-        SeleccionarCliente sc = new SeleccionarCliente(jPanel1,u);
+        SeleccionarCliente sc = new SeleccionarCliente(jPanel1, u);
         sc.getContentPane().setBackground(estilos.getColorInterior());
         jPanel1.add(sc.getContentPane());
         jPanel1.repaint();
-        
+
         boton_addClientes.setBackground(estilos.getColorBotones());
         btnGastos.setBackground(estilos.getColorBotones());
         btnInformes.setBackground(estilos.getColorBotones());
@@ -273,7 +269,7 @@ public class MenuPrincipal extends JFrame {
         mt.getContentPane().setBackground(estilos.getColorInterior());
         jPanel1.add(mt.getContentPane());
         jPanel1.repaint();
-        
+
         boton_addClientes.setBackground(estilos.getColorBotones());
         btnGastos.setBackground(estilos.getColorBotones());
         btnInformes.setBackground(estilos.getColorBotones());
@@ -292,7 +288,7 @@ public class MenuPrincipal extends JFrame {
         gg.getContentPane().setBackground(estilos.getColorInterior());
         jPanel1.add(gg.getContentPane());
         jPanel1.repaint();
-        
+
         boton_addClientes.setBackground(estilos.getColorBotones());
         btnGastos.setBackground(Color.yellow);
         btnInformes.setBackground(estilos.getColorBotones());
@@ -307,7 +303,7 @@ public class MenuPrincipal extends JFrame {
         s.getContentPane().setBackground(estilos.getColorInterior());
         jPanel1.add(s.getContentPane());
         jPanel1.repaint();
-        
+
         boton_addClientes.setBackground(estilos.getColorBotones());
         btnGastos.setBackground(estilos.getColorBotones());
         btnInformes.setBackground(estilos.getColorBotones());
@@ -317,7 +313,7 @@ public class MenuPrincipal extends JFrame {
     }//GEN-LAST:event_btnStockActionPerformed
 
     private void btnInformesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInformesActionPerformed
-        
+        ga.GenerarInformeMensual();
         infor.olivaEntradaTotal();
     }//GEN-LAST:event_btnInformesActionPerformed
 
